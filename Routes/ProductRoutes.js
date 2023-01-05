@@ -13,17 +13,24 @@ productRoute.get(
   }),
   asyncHandler(async (req, res) => {
     const keyword = req.query.keyword
-      ? {
+  ? {
+      $or: [
+        {
           name: {
             $regex: req.query.keyword,
             $options: "i",
           },
+        },
+        {
           normalizedName: {
             $regex: req.query.keyword,
             $options: "i",
           },
-        }
-      : {};
+        },
+      ],
+    }
+  : {};
+
 
     const products = await Product.find({ ...keyword });
     res.json(products);
