@@ -4,6 +4,7 @@ const all = [
     nameId: "espresso",
     name: "Cà Phê Đen Gu Tick",
     normalizedName:"ca phe den gu tick",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449472/product/CF_%C4%91en_i00pxg.jpg",
     price: "25000",
@@ -14,6 +15,7 @@ const all = [
     nameId: "brown-coffee",
     name: "Cà Phê Nâu",
     normalizedName:"ca phe nau",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449472/product/Tickproduct-C%C3%A0_ph%C3%AA_n%C3%A2u-final_iuw142.jpg",
     price: "29000",
@@ -24,6 +26,7 @@ const all = [
     nameId: "milk_coffee",
     name: "Bạc Xỉu",
     normalizedName:"bac xiu",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449472/product/Cf_k%E1%BA%B9o_pv5vqw.jpg",
     price: "32000",
@@ -34,6 +37,7 @@ const all = [
     nameId: "candy_coffee",
     name: "Cà Phê Kẹo",
     normalizedName:"ca phe keo",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449472/product/Cf_k%E1%BA%B9o_pv5vqw.jpg",
     price: "29000",
@@ -44,6 +48,7 @@ const all = [
     nameId: "egg_coffee",
     name: "Cà Phê Trứng",
     normalizedName:"ca phe trung",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449482/product/Cf_tr%E1%BB%A9ng_fnaqzj.jpg",
     price: "35000",
@@ -54,6 +59,7 @@ const all = [
     nameId: "matcha_coffee",
     name: "Cà Phê Trà Xanh",
     normalizedName:"ca phe tra xanh",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449477/product/Tick_latte_fbmulw.jpg",
     price: "45000",
@@ -64,6 +70,7 @@ const all = [
     nameId: "cacao_coffee",
     name: "Cacao Sữa Đá",
     normalizedName:"cacao sua da",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449481/product/cacao_zl1cq2.jpg",
     price: "30000",
@@ -74,6 +81,7 @@ const all = [
     nameId: "water_coffee",
     name: "Americano",
     normalizedName:"americano",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449482/product/Americano_blxjkt.jpg",
     price: "30000",
@@ -84,6 +92,7 @@ const all = [
     nameId: "caramel_coffee",
     name: "Caramel Tick Cà Phê",
     normalizedName:"ca phe caramel tick",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449475/product/caramel_tick_mfplzi.jpg",
     price: "45000",
@@ -94,6 +103,7 @@ const all = [
     nameId: "egg_cacao",
     name: "Cacao Trứng",
     normalizedName:"cacao trung",
+    englishName:"coffee coffé coffe",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449481/product/Cacao_tr%E1%BB%A9ng_xddzxh.jpg",
     price: "35000",
@@ -104,6 +114,7 @@ const all = [
     nameId: "atiso_tea",
     name: "Trà Atiso Quả Mọng",
     normalizedName:"tra atiso qua mong",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449479/product/hibicus_zydyiu.jpg",
     price: "45000",
@@ -114,6 +125,7 @@ const all = [
     nameId: "pitaya_tea",
     name: "Trà Thanh Long Việt Quất",
     normalizedName:"tra thanh long viet quat",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449478/product/pitaya_vi%E1%BB%87t_qu%E1%BA%A5t_ryp35j.jpg",
     price: "42000",
@@ -124,6 +136,7 @@ const all = [
     nameId: "guava_tea",
     name: "Trà Ổi Xá Lị",
     normalizedName:"tra oi xa li",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449479/product/%E1%BB%94i_x%C3%A1_l%E1%BB%8B_jetg4z.jpg",
     price: "45000",
@@ -134,6 +147,7 @@ const all = [
     nameId: "lichi_rose_tea",
     name: "Trà Vải Hoa Hồng",
     normalizedName:"tra vai hoa hong",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449479/product/V%E1%BA%A3i_hoa_h%E1%BB%93ng_cjwaar.jpg",
     price: "50000",
@@ -144,6 +158,7 @@ const all = [
     nameId: "pineapple_tea",
     name: "Trà Lài Đác Thơm",
     normalizedName:"tra lai dac thom",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449473/product/Tickproduct-Th%C6%A1m-final_d0w5yh.jpg",
     price: "50000",
@@ -154,6 +169,7 @@ const all = [
     nameId: "apple_tea",
     name: "Trà Táo Nhiệt Đới",
     normalizedName:"tra tao nhiet doi",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449475/product/Tr%C3%A0_t%C3%A1o_nhi%E1%BB%87t_%C4%91%E1%BB%9Bi_kiblxs.jpg",
     price: "45000",
@@ -164,6 +180,7 @@ const all = [
     nameId: "herb_tea",
     name: "Trà Vải Thảo Mộc",
     normalizedName:"tra vai thao moc",
+    englishName:"tea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449476/product/V%E1%BA%A3i_th%E1%BA%A3o_m%E1%BB%99c_xhkob4.jpg",
     price: "47000",
@@ -174,6 +191,7 @@ const all = [
     nameId: "traditional_milktea",
     name: "Trà Sữa Truyền Thống",
     normalizedName:"tra sua truyen thong",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449477/product/Trs_Truy%E1%BB%81n_th%E1%BB%91ng_absv0d.jpg",
     price: "30000",
@@ -184,6 +202,7 @@ const all = [
     nameId: "tick_milktea",
     name: "Trà Sữa Tick",
     normalizedName:"tra sua tick",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449475/product/Trs_Tick_baew2j.jpg",
     price: "35000",
@@ -194,6 +213,7 @@ const all = [
     nameId: "olong_milktea-1",
     name: "Trà Sữa Olong Rang",
     normalizedName:"tra sua olong rang",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449479/product/Trs_Olong_iiymp7.jpg",
     price: "35000",
@@ -204,6 +224,7 @@ const all = [
     nameId: "olong_milktea-2",
     name: "Trà Sữa Pandan",
     normalizedName:"tra sua pandan",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449474/product/olong_l%C3%A1_d%E1%BB%A9a_bom346.jpg",
     price: "38000",
@@ -214,6 +235,7 @@ const all = [
     nameId: "bambooCharcoal_milktea",
     name: "Trà Sữa Than Tre Machiato",
     normalizedName:"tra sua than tre machiato",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449472/product/Trs_than_tre_machiato_oohfdp.jpg",
     price: "45000",
@@ -224,6 +246,7 @@ const all = [
     nameId: "taro_milktea",
     name: "Sữa Tươi Khoai Môn",
     normalizedName:"sua tươi khoai mon",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449472/product/Tickproduct-s%E1%BB%AFa_khoai_m%C3%B4n-final_z4ql2x.jpg",
     price: "38000",
@@ -234,6 +257,7 @@ const all = [
     nameId: "blackSugar_milktea",
     name: "Sữa Tươi Trân Châu Đường Đen",
     normalizedName:"sua tuoi tran chau duong den",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449475/product/S%E1%BB%AFa_t%C6%B0%C6%A1i_tr%C3%A2n_ch%C3%A2u_%C4%91%C6%B0%E1%BB%9Dng_%C4%91en_ikcq4h.jpg",
     price: "35000",
@@ -244,6 +268,7 @@ const all = [
     nameId: "matchaBlackSugar_milktea",
     normalizedName:"matcha duong den",
     name: "Matcha Đường Đen",
+    englishName:"milk tea milktea",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449477/product/Tickproduct-Matcha_s%E1%BB%AFa_t%C6%B0%C6%A1i_V2-final_mtqm8b.jpg",
     price: "37000",
@@ -254,6 +279,7 @@ const all = [
     nameId: "chocolate_iceblend",
     normalizedName:"Chocolate da xay",
     name: "Chocolate Đá Xay",
+    englishName:"iceblend blender",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449474/product/Kakao_%C4%91%C3%A1_xay_tr%C3%A2n_ch%C3%A2u_riqjuy.jpg",
     price: "30000",
@@ -264,6 +290,7 @@ const all = [
     nameId: "caramel_iceblend",
     name: "Caramel Đá Xay",
     normalizedName:"caramel ca phe da xay",
+    englishName:"iceblend blender",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449480/product/Caramel_cf_%C4%91%C3%A1_xay_phtrx8.jpg",
     price: "35000",
@@ -274,6 +301,7 @@ const all = [
     nameId: "bluebery_iceblend",
     name: "Việt Quất Đá Xay",
     normalizedName:"viet quat da xay",
+    englishName:"iceblend blender",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449476/product/%C4%91%C3%A1_xay_vi%E1%BB%87t_qu%E1%BA%A5t_o4ysvg.jpg",
     price: "35000",
@@ -284,6 +312,7 @@ const all = [
     nameId: "cacao_iceblend",
     name: "Cacao Đá Xay",
     normalizedName:"caocao da xay",
+    englishName:"iceblend blender",
     image:
       "https://res.cloudinary.com/dvtv1j2rn/image/upload/v1671449474/product/Kakao_%C4%91%C3%A1_xay_tr%C3%A2n_ch%C3%A2u_riqjuy.jpg",
     price: "38000",

@@ -24,6 +24,10 @@ const  productSchema = mongoose.Schema({
         type:String,
         require:true
     },
+    englishName:{
+        type:String,
+        require:true
+    },
     title:{
         type:String,
         require:true,

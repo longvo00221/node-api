@@ -21,21 +21,21 @@ dotenv.config();
 connectDatabase();
 // web socket
 const server = http.createServer(app);
-const client = redis.createClient()
-const wss = new WebSocketServer({server:server})
-wss.on("connection",function connection(ws) {
-    console.log(`New Connect From Client`)
-    // ws.send("Hello new Client")
-    ws.on("message", function incoming(message){
-        console.log("received : %s ", message)
-        wss.clients.forEach(function each(client) {
-            if(client !== ws && client.readyState === WebSocket.OPEN){
-                client.send(`${message} `, JSON.stringify(message))
-            }
-        })
+// const client = redis.createClient()
+// const wss = new WebSocketServer({server:server})
+// wss.on("connection",function connection(ws) {
+//     console.log(`New Connect From Client`)
+//     // ws.send("Hello new Client")
+//     ws.on("message", function incoming(message){
+//         console.log("received : %s ", message)
+//         wss.clients.forEach(function each(client) {
+//             if(client !== ws && client.readyState === WebSocket.OPEN){
+//                 client.send(`${message} `, JSON.stringify(message))
+//             }
+//         })
 
-    })
-})
+//     })
+// })
 //PUSHER
 
 const pusher = new Pusher({
