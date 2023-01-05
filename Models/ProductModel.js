@@ -20,11 +20,16 @@ const  productSchema = mongoose.Schema({
         type:String,
         require:true
     },
+    normalizedName:{
+        type:String,
+        require:true
+    },
     title:{
         type:String,
         require:true,
         unique:true,
     },
+    
     nameId:{
         type:String,
         require:true,

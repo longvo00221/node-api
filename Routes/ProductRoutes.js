@@ -18,6 +18,10 @@ productRoute.get(
             $regex: req.query.keyword,
             $options: "i",
           },
+          normalizedName: {
+            $regex: req.query.keyword,
+            $options: "i",
+          },
         }
       : {};
 
