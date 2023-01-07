@@ -19,8 +19,8 @@ const transport = nodemailer.createTransport({
     secure: false,
     service: "gmail",
     auth: {
-      user: "longvo010203@gmail.com",
-      pass: "xoyxmfublwfoqwph",
+      user: "tickcafetea@gmail.com",
+      pass: "sxjrqwujvipfzkzg",
     }, 
   });
 
@@ -33,7 +33,7 @@ function generateVerificationToken() {
 // Send a verification email
 async function sendVerificationEmail(email, verificationToken) {
   const message = {
-    from: "longvo010203@gmail.com",
+    from: "tickcafetea@gmail.com",
     to: email,
     subject: "Verification Account",
     text: `Please click the following link to verify your email: ${process.env.FRONTEND_URL}/verify/${verificationToken}`,
