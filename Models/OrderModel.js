@@ -51,7 +51,9 @@ const orderSchema = mongoose.Schema({
         required:true,
         default:0.0
     },
-    
+    invoiceCode:{
+        type:String,
+    },
    
     shippingPrice:{
         type:Number,

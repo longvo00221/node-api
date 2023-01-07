@@ -6,11 +6,16 @@ import Order from "./../Models/OrderModel.js";
 const orderRouter = express.Router();
 
 // CREATE ORDER
+let invoiceCodeCounter = 0;
+
+setInterval(() => {
+  invoiceCodeCounter = 0;
+}, 86400000);
 orderRouter.post(
   "/",
   cors({
-  origin: '*'
-}),
+    origin: "*"
+  }),
   protect,
   asyncHandler(async (req, res) => {
     const {
@@ -27,6 +32,8 @@ orderRouter.post(
       throw new Error("No order items");
       return;
     } else {
+      invoiceCodeCounter++;
+      const invoiceCode = `HDTICK-${invoiceCodeCounter.toString().padStart(4, "0")}`;
       const order = new Order({
         orderItems,
         user: req.user._id,
@@ -35,6 +42,7 @@ orderRouter.post(
         itemsPrice,
         shippingPrice,
         totalPrice,
+        invoiceCode,
       });
 
       const createOrder = await order.save();
