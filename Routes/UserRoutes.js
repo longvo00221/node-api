@@ -19,8 +19,8 @@ const transport = nodemailer.createTransport({
     secure: false,
     service: "gmail",
     auth: {
-      user: "longvo010203@gmail.com",
-      pass: "xoyxmfublwfoqwph",
+      user: "tickcafetea@gmail.com",
+      pass: "ixnvyeglkyhkamen",
     }, 
   });
 
@@ -33,7 +33,7 @@ function generateVerificationToken() {
 // Send a verification email
 async function sendVerificationEmail(email, verificationToken) {
   const message = {
-    from: "longvo010203@gmail.com",
+    from: "tickcafetea@gmail.com",
     to: email,
     subject: "Verification Account",
     text: `Please click the following link to verify your email: ${process.env.FRONTEND_URL}/verify/${verificationToken}`,
@@ -243,7 +243,6 @@ userRouter.post(
   cors({ origin: "*" }),
   asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
-
     if (!user) {
       // Instead of passing an error to the next middleware, you can return a response to the client with a descriptive error message
       return res.status(404).json({
