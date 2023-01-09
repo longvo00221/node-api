@@ -568,7 +568,13 @@ userRouter.post(
     max: 5, // limit each IP to 100 requests per windowMs
     message: "Too many login attempts from this IP, please try again later"
   }),
+  check('email').isEmail().withMessage('Please enter a valid email'),
+  check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
   asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const { name, email, phone, password, birthday, address } = req.body;
 
     const userExists = await User.findOne({ email });
@@ -679,9 +685,14 @@ userRouter.post(
       // Generate an access token and refresh token
       const accessToken = generateToken(user._id);
       const refreshToken = generateRefreshToken();
-
+      
       // Store the refresh token in the database or cache
       await user.update({ refreshToken });
+      res.cookie('accessToken', accessToken, {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 1, // 1 days
+        sameSite:'strict'
+      })
       res.json({
         _id: user._id,
         name: user.name,
