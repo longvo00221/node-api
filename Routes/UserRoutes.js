@@ -2,15 +2,16 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import protect, { admin } from "../Middleware/AuthMiddleware.js";
 import authorizeRoles from "../Middleware/auth.js";
-import generateToken from "../utils/generateToken.js";
+import generateToken,{generateRefreshToken} from "../utils/generateToken.js";
 import sendToken from "../utils/sendToken.js";
 import User from "./../Models/UserModel.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto";
 import cors from "cors";
 import dotenv from "dotenv";
-import sgMail from "@sendgrid/mail";
 import nodemailer from "nodemailer";
+import rateLimit from 'express-rate-limit'
+import { check, validationResult } from 'express-validator'
 const userRouter = express.Router();
 // Create a transport object using nodemailer
 const transport = nodemailer.createTransport({
@@ -28,6 +29,8 @@ const transport = nodemailer.createTransport({
 function generateVerificationToken() {
   return Math.random().toString(36).substring(2);
 }
+//Generate refesh token from user 
+
 //vadidate email
 
 // Send a verification email
@@ -560,6 +563,11 @@ userRouter.post(
   cors({
     origin: "*",
   }),
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // limit each IP to 100 requests per windowMs
+    message: "Too many login attempts from this IP, please try again later"
+  }),
   asyncHandler(async (req, res) => {
     const { name, email, phone, password, birthday, address } = req.body;
 
@@ -609,12 +617,57 @@ userRouter.post(
   })
 );
 // LOGIN
+// userRouter.post(
+//   "/login",
+//   cors({
+//     origin: "*",
+//   }),
+//   asyncHandler(async (req, res) => {
+//     const { email, password } = req.body;
+//     const user = await User.findOne({ email });
+
+//     if (
+//       user &&
+//       user.verificationToken != null &&
+//       (await user.matchPassword(password))
+//     ) {
+//       res.json({
+//         _id: user._id,
+//         name: user.name,
+//         email: user.email,
+//         phone: user.phone,
+//         birthday: user.birthday,
+//         avatar: user.avatar,
+//         isAdmin: user.isAdmin,
+//         token: generateToken(user._id),
+//         createdAt: user.createdAt,
+//       });
+//     } else if (user && user.verificationToken === null) {
+//       res.status(401).json({ message: "Please verify your email" });
+//     } else {
+//       res.status(401).json({ message: "Invalid Email or Password" });
+//     }
+//   })
+// );
+
 userRouter.post(
-  "/login",
+  '/login',
   cors({
-    origin: "*",
+    origin: '*',
   }),
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 20, // limit each IP to 100 requests per windowMs
+    message: 'Too many login attempts from this IP, please try again later',
+  }),
+  check('email').isEmail().withMessage('Please enter a valid email'),
+  check('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
   asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
@@ -623,6 +676,12 @@ userRouter.post(
       user.verificationToken != null &&
       (await user.matchPassword(password))
     ) {
+      // Generate an access token and refresh token
+      const accessToken = generateToken(user._id);
+      const refreshToken = generateRefreshToken();
+
+      // Store the refresh token in the database or cache
+      await user.update({ refreshToken });
       res.json({
         _id: user._id,
         name: user.name,
@@ -631,13 +690,50 @@ userRouter.post(
         birthday: user.birthday,
         avatar: user.avatar,
         isAdmin: user.isAdmin,
-        token: generateToken(user._id),
+        token: accessToken,
+        refreshToken: refreshToken,
         createdAt: user.createdAt,
       });
     } else if (user && user.verificationToken === null) {
-      res.status(401).json({ message: "Please verify your email" });
+      res.status(401).json({ message: 'Please verify your email' });
     } else {
-      res.status(401).json({ message: "Invalid Email or Password" });
+      res.status(401).json({ message: 'Invalid Email or Password' });
+    }
+  })
+);
+
+//refesh token
+userRouter.post(
+  "/refresh-token",
+  cors({
+    origin: "*",
+  }),
+  asyncHandler(async (req, res) => {
+    const { refreshToken } = req.body;
+    const user = await User.findOne({ refreshToken });
+
+    if (user) {
+      // Generate a new access token
+      const accessToken = generateToken(user._id);
+
+      // Update the refresh token
+      const newRefreshToken = generateRefreshToken();
+      await user.update({ refreshToken: newRefreshToken });
+
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        birthday: user.birthday,
+        avatar: user.avatar,
+        isAdmin: user.isAdmin,
+        token: accessToken,
+        refreshToken: newRefreshToken,
+        createdAt: user.createdAt,
+      });
+    } else {
+      res.status(401).json({ message: "Invalid refresh token" });
     }
   })
 );
@@ -740,6 +836,11 @@ userRouter.put(
 userRouter.post(
   "/password/forgot",
   cors({ origin: "*" }),
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10, // limit each IP to 100 requests per windowMs
+    message: "Too many login attempts from this IP, please try again later"
+  }),
   asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
@@ -790,6 +891,11 @@ userRouter.post(
 userRouter.put(
   "/password/reset/:token",
   cors({ origin: "*" }),
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 10, // limit each IP to 100 requests per windowMs
+    message: "Too many login attempts from this IP, please try again later"
+  }),
   asyncHandler(async (req, res, next) => {
     // creating token hash
     const resetPasswordToken = crypto

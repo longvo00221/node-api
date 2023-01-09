@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import cors from "cors";
 import protect, { admin } from "../Middleware/AuthMiddleware.js";
 import Order from "./../Models/OrderModel.js";
+import rateLimit from 'express-rate-limit'
 const orderRouter = express.Router();
 
 // CREATE ORDER
@@ -16,6 +17,11 @@ orderRouter.post(
   "/",
   cors({
     origin: "*"
+  }),
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 20, // limit each IP to 100 requests per windowMs
+    message: "Too many login attempts from this IP, please try again later"
   }),
   protect,
   asyncHandler(async (req, res) => {
