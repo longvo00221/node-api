@@ -688,11 +688,14 @@ userRouter.post(
       
       // Store the refresh token in the database or cache
       await user.update({ refreshToken });
-      res.cookie('accessToken', accessToken, {
+      res.cookie('access_token', accessToken, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 1, // 1 days
-        sameSite:'strict'
+        sameSite:'strict',
+        domain:"https://tickcafentea.com",
+        path:"/",
       })
+    
       res.json({
         _id: user._id,
         name: user.name,
@@ -721,6 +724,7 @@ userRouter.post(
   }),
   asyncHandler(async (req, res) => {
     const { refreshToken } = req.body;
+    
     const user = await User.findOne({ refreshToken });
 
     if (user) {
@@ -773,8 +777,7 @@ userRouter.get(
         createdAt: user.createdAt,
       });
     } else {
-      res.status(404);
-      throw new Error("User not found");
+      res.status(401).json({ message: "Token Is Expired" });
     }
   })
 );

@@ -17,22 +17,19 @@ const protect = asyncHandler(async (req, res, next) => {
       req.user = await User.findById(decoded.id).select("-password");
       next();
     } catch (error) {
-        res.status(401);
-        throw new Error("Not authorized, token failed");
+      res.status(401).json({ message: "Not authorized, token failed" });
     }
   }
   if (!token) {
-    res.status(401);
-    throw new Error("Not authorized, no token");
+    res.status(401).json({ message: "Not authorized, no token" })
   }
 });
 
-export const admin = (req,res,next) => {
-  if(req.user && req.user.isAdmin){
-    next()
-  }else{
-    res.status(401)
-    throw new Error("Not authorized as an Admin")
+export const admin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401).json({ message: "Not authorized as an Admin" })
   }
-}
-export default protect
+};
+export default protect;
