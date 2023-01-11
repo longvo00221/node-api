@@ -4,8 +4,25 @@ import cors from "cors";
 import protect, { admin } from "../Middleware/AuthMiddleware.js";
 import Order from "./../Models/OrderModel.js";
 import rateLimit from 'express-rate-limit'
+import nodemailer from "nodemailer";
 const orderRouter = express.Router();
-
+const transport = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: false,
+  service: "gmail",
+  auth: {
+    user: "tickcafetea@gmail.com",
+    pass: "ixnvyeglkyhkamen",
+  },
+});
+async function sendEmailOrderBill(email) {
+  const message = {
+    from: "tickcafetea@gmail.com",
+    to: email,
+    subject: "Verification Account",
+  };
+}
 // CREATE ORDER
 let invoiceCodeCounter = 0;
 

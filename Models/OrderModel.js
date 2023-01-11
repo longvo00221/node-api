@@ -6,10 +6,6 @@ const orderSchema = mongoose.Schema({
         require:true,
         ref:"User"
     },
-    // mood,
-    // sugar,
-    // ice,
-    // topping,
     orderItems:[
         {
             name:{type:String,required:true},
@@ -30,7 +26,8 @@ const orderSchema = mongoose.Schema({
     shippingAddress:{
         address:{type:String,required:true},
         name:{type:String,required:true},
-        district:{type:String,required:false},
+        district:{type:String,required:true},
+        ward:{type:String,required:true},
         distance:{type:String,required:false},
         phone:{type:String,required:true},
         delivery:{type:String,required:true},
