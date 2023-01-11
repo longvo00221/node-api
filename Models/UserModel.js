@@ -47,6 +47,7 @@ const userSchema = mongoose.Schema(
     address: {
       type: String,
       require: true,
+      default:"TP Hồ Chí Minh"
     },
     birthday: {
       type: String,

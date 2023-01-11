@@ -759,6 +759,7 @@ userRouter.get(
   asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
+
     if (user) {
       res.json({
         _id: user._id,
@@ -797,10 +798,10 @@ userRouter.put(
       res.json({
         _id: updatedUser._id,
         name: updatedUser.name,
-        email: updatedUser.email,
-        phone: user.phone,
-        address: user.address,
-        birthday: user.birthday,
+        email: user.email,
+        phone: updatedUser.phone,
+        address: updatedUser.address,
+        birthday: updatedUser.birthday,
         isAdmin: updatedUser.isAdmin,
         createdAt: updatedUser.createdAt,
         token: generateToken(updatedUser._id),
