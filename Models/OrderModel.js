@@ -26,7 +26,7 @@ const orderSchema = mongoose.Schema({
     shippingAddress:{
         address:{type:String,required:true},
         name:{type:String,required:true},
-        district:{type:String,required:true},
+        endAddress:{type:String,required:true},
         ward:{type:String,required:true},
         distance:{type:String,required:false},
         phone:{type:String,required:true},
