@@ -545,7 +545,9 @@ async function sendVerificationEmail(email, verificationToken) {
   await transport.sendMail(message);
 }
 // verifi token mail
-userRouter.get("/verify/:verificationToken", async (req, res) => {
+userRouter.get("/verify/:verificationToken",cors({
+  origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+  }), async (req, res) => {
   const user = await User.findOneAndUpdate(
     { verificationToken: null },
     { verificationToken: req.params.verificationToken }
@@ -561,8 +563,8 @@ userRouter.get("/verify/:verificationToken", async (req, res) => {
 userRouter.post(
   "/",
   cors({
-    origin: "*",
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 5, // limit each IP to 100 requests per windowMs
@@ -659,8 +661,8 @@ userRouter.post(
 userRouter.post(
   '/login',
   cors({
-    origin: '*',
-  }),
+    origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+    }),
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 20, // limit each IP to 100 requests per windowMs
@@ -720,8 +722,8 @@ userRouter.post(
 userRouter.post(
   "/refresh-token",
   cors({
-    origin: "*",
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const { refreshToken } = req.body;
     
@@ -758,8 +760,8 @@ userRouter.get(
   "/profile",
   protect,
   cors({
-    origin: "*",
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
@@ -786,8 +788,8 @@ userRouter.put(
   "/profile",
   protect,
   cors({
-    origin: "*",
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 
@@ -820,8 +822,8 @@ userRouter.put(
   "/avatar",
   protect,
   cors({
-    origin: "*",
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
 

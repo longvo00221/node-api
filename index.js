@@ -8,7 +8,7 @@ import userRouter from "./Routes/UserRoutes.js";
 import orderRouter from "./Routes/orderRoutes.js";
 import { WebSocketServer, WebSocket } from "ws";
 import http from "http";
-import redis from 'redis'
+import redis from "redis";
 import momoRouter from "./Routes/MomoRoutes.js";
 import path from "path";
 
@@ -16,7 +16,7 @@ import Pusher from "pusher";
 const app = express();
 console.log(connectDatabase);
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 dotenv.config();
 connectDatabase();
 // web socket
@@ -44,37 +44,53 @@ const pusher = new Pusher({
   secret: process.env.SERECT_PUSHER,
   cluster: process.env.CLUSTER_PUSHER,
 
-  useTLS: true
+  useTLS: true,
 });
-app.post('/send-event', (req, res) => {
-  pusher.trigger('orders', 'admin-new-order', {
-    message: `Đơn Đặt Hàng Mới Từ ${req.body.name}!`
+app.post("/send-event", (req, res) => {
+  pusher.trigger("orders", "admin-new-order", {
+    message: `Đơn Đặt Hàng Mới Từ ${req.body.name}!`,
   });
   res.sendStatus(200);
 });
 
-
-
 // API
 app.use("/api/import", ImportData);
-app.use("/api/products", cors({
-  origin: '*'
-}), productRoute);
+app.use(
+  "/api/products",
+  cors({
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
+  }),
+  productRoute
+);
 
-app.use("/api/users", cors({
-  origin: '*'
-}), userRouter);
-app.use("/api/orders", cors({
-  origin: '*'
-}), orderRouter);
-app.use('/api/momo',cors({
-  origin: '*'
-}),momoRouter)
+app.use(
+  "/api/users",
+  cors({
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
+  }),
+  userRouter
+);
+app.use(
+  "/api/orders",
+  cors({
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
+  }),
+  orderRouter
+);
+app.use(
+  "/api/momo",
+  cors({
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
+  }),
+  momoRouter
+);
 
 app.get("/", (req, res) => {
   res.send("Api");
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(process.env.PORT || 5000, console.log(`server is running ${PORT} `));
-
+server.listen(
+  process.env.PORT || 5000,
+  console.log(`server is running ${PORT} `)
+);

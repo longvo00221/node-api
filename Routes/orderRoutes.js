@@ -20,14 +20,15 @@ const transport = nodemailer.createTransport({
 async function sendEmailOrderBillAdmin(
   shippingAddress,
   paymentMethod,
-  totalPrice) {
+  totalPrice
+) {
   const message = {
     from: "tickcafetea@gmail.com",
     to: "vlong3589@gmail.com",
     subject: "Order Bill",
-    text:`Đơn Hàng Mới Từ ${shippingAddress.name},${shippingAddress.delivery},Số Điện Thoại:${shippingAddress.phone},Địa Chỉ:${shippingAddress.address},Quận:${shippingAddress.ward},Phương Thức Thanh Toán:${paymentMethod},Tổng Tiền:${totalPrice},xem thêm chi tiết tại admin page : https://admin.tickcafetea.com/`,
+    text: `Đơn Hàng Mới Từ ${shippingAddress.name},${shippingAddress.delivery},Số Điện Thoại:${shippingAddress.phone},Địa Chỉ:${shippingAddress.address},Quận:${shippingAddress.ward},Phương Thức Thanh Toán:${paymentMethod},Tổng Tiền:${totalPrice},xem thêm chi tiết tại admin page : https://admin.tickcafetea.com/`,
   };
-  
+
   await transport.sendMail(message);
 }
 // CREATE ORDER
@@ -40,7 +41,7 @@ setInterval(() => {
 orderRouter.post(
   "/",
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
   }),
   rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -97,7 +98,7 @@ orderRouter.post(
 orderRouter.get(
   "/all",
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
   }),
   protect,
   admin,
@@ -113,7 +114,7 @@ orderRouter.get(
 orderRouter.get(
   "/",
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
   }),
   protect,
   asyncHandler(async (req, res) => {
@@ -126,7 +127,7 @@ orderRouter.get(
 orderRouter.get(
   "/:id",
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
   }),
   protect,
   asyncHandler(async (req, res) => {
@@ -148,7 +149,7 @@ orderRouter.get(
 orderRouter.put(
   "/:id/pay",
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
   }),
   protect,
   asyncHandler(async (req, res) => {

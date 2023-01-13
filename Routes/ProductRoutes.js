@@ -9,8 +9,8 @@ const productRoute = express.Router();
 productRoute.get(
   "/",
   cors({
-    origin: '*'
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const keyword = req.query.keyword
   ? {
@@ -45,8 +45,8 @@ productRoute.get(
 productRoute.get(
   "/topping",
   cors({
-    origin: '*'
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const keyword = req.query.keyword
       ? {
@@ -64,8 +64,8 @@ productRoute.get(
 productRoute.get(
   "/:id",
   cors({
-    origin: '*'
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -81,8 +81,8 @@ productRoute.delete(
   "/:id",
   protect,
   cors({
-    origin: '*'
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   admin,
   asyncHandler(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
@@ -100,8 +100,8 @@ productRoute.post(
   "/",
   protect,
   cors({
-    origin: '*'
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   admin,
   asyncHandler(async (req, res, next) => {
     const { name, title, nameId, image, price, countInStock } = req.body;
@@ -136,8 +136,8 @@ productRoute.put(
   protect,
   admin,
   cors({
-    origin: '*'
-  }),
+origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
+}),
   asyncHandler(async (req, res, next) => {
     const { name, title, nameId, image, price, countInStock } = req.body;
     const product = await Product.findById(req.params.id);

@@ -2,14 +2,14 @@ import express from "express";
 import asyncHandler from "express-async-handler";
 import cors from "cors";
 import https from "https";
-import crypto from 'crypto'
+import crypto from "crypto";
 
 const momoRouter = express.Router();
 // CREATE ORDER
 momoRouter.post(
   "/",
   cors({
-    origin: '*'
+    origin: ["http://localhost:3000", "https://www.tickcafentea.com"],
   }),
   asyncHandler(async (request, res) => {
     try {
@@ -27,12 +27,12 @@ momoRouter.post(
         requestType,
         extraData,
       } = request.body;
-      
+
       // create the raw signature
       const rawSignature = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&ipnUrl=${ipnUrl}&orderId=${orderId}&orderInfo=${orderInfo}&partnerCode=${partnerCode}&redirectUrl=${redirectUrl}&requestId=${requestId}&requestType=${requestType}`;
 
       // compute the signature
-    
+
       const signature = crypto
         .createHmac("sha256", secretkey)
         .update(rawSignature)
@@ -53,8 +53,6 @@ momoRouter.post(
         signature,
         lang: "en",
       });
-      
-
 
       // create the request options
       const options = {
@@ -93,7 +91,6 @@ momoRouter.post(
       console.log("Sending....");
       req.write(requestBody);
       req.end();
-
     } catch (error) {
       console.error(error);
       res.send({ success: false, error: error.message });
