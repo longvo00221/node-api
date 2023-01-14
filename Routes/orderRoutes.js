@@ -17,16 +17,78 @@ const transport = nodemailer.createTransport({
     pass: "ixnvyeglkyhkamen",
   },
 });
+
 async function sendEmailOrderBillAdmin(
   shippingAddress,
   paymentMethod,
-  totalPrice
+  totalPrice,
+  orderItems
 ) {
+  let orderItemsHTML = "";
+for (let i = 0; i < orderItems.length; i++) {
+  let toppingHTML = "";
+    if (orderItems[i].topping) {
+      for (let j = 0; j < orderItems[i].topping.length; j++) {
+        toppingHTML += `<h5>topping: ${orderItems[i].topping[j].value}</h5>`;
+      }
+    }
+    orderItemsHTML += `
+    <div class="product-item">
+        <h4>${orderItems[i].name} x${orderItems[i].qty}</h4>
+        ${toppingHTML}
+    </div>
+    `;
+  }
   const message = {
     from: "tickcafetea@gmail.com",
     to: "vlong3589@gmail.com",
     subject: "Order Bill",
-    text: `Đơn Hàng Mới Từ ${shippingAddress.name},${shippingAddress.delivery},Số Điện Thoại:${shippingAddress.phone},Địa Chỉ:${shippingAddress.address},Quận:${shippingAddress.ward},Phương Thức Thanh Toán:${paymentMethod},Tổng Tiền:${totalPrice},xem thêm chi tiết tại admin page : https://admin.tickcafetea.com/`,
+    // text: `Đơn Hàng Mới Từ ${shippingAddress.name},${shippingAddress.delivery},Số Điện Thoại:${shippingAddress.phone},Địa Chỉ:${shippingAddress.address},Quận:${shippingAddress.ward},Phương Thức Thanh Toán:${paymentMethod},Tổng Tiền:${totalPrice},xem thêm chi tiết tại admin page : https://admin.tickcafetea.com/`,
+    html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:o="urn:schemas-microsoft-com:office:office"
+    >
+      <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta name="x-apple-disable-message-reformatting" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="telephone=no" name="format-detection" />
+        <title>New email template 2023-01-11</title>
+        <style type="text/css">
+        .product-item{
+          border-bottom: 1px solid #000;
+          display: inline-block;
+        }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>Bạn Có Một Đơn Hàng Mới</h1>
+          <h2>
+            <strong>Khách Hàng : ${shippingAddress.name}</strong>
+          </h2>
+          <h2>
+            <strong>Giao Hàng : ${shippingAddress.delivery},</strong>
+          </h2>
+          <h2>
+            <strong>Số Điện Thoại : ${shippingAddress.phone},</strong>
+          </h2>
+          <h2>
+            <strong>Địa Chỉ : ${shippingAddress.address},${shippingAddress.ward},${shippingAddress.endAddress}</strong>
+          </h2>
+          <h2>
+            <strong>Phương Thức Thanh Toán : ${paymentMethod}</strong>
+          </h2>
+          <div class="product-list">
+            <h2>Danh Sách Sản phẩm:</h2>
+                ${orderItemsHTML}
+          </div>
+        </div>
+      </body>
+    </html>
+    `,
   };
 
   await transport.sendMail(message);
@@ -58,7 +120,6 @@ orderRouter.post(
       shippingPrice,
       totalPrice,
     } = req.body;
-
     if (orderItems && orderItems.length === 0) {
       res.status(400);
       throw new Error("No order items");
@@ -78,11 +139,13 @@ orderRouter.post(
         totalPrice,
         invoiceCode,
       });
+   
       try {
         await sendEmailOrderBillAdmin(
           shippingAddress,
           paymentMethod,
-          totalPrice
+          totalPrice,
+          orderItems
         );
       } catch (error) {
         res.status(500).json({ message: "Error sending verification email" });

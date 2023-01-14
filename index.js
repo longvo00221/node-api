@@ -21,37 +21,6 @@ dotenv.config();
 connectDatabase();
 // web socket
 const server = http.createServer(app);
-// const client = redis.createClient()
-// const wss = new WebSocketServer({server:server})
-// wss.on("connection",function connection(ws) {
-//     console.log(`New Connect From Client`)
-//     // ws.send("Hello new Client")
-//     ws.on("message", function incoming(message){
-//         console.log("received : %s ", message)
-//         wss.clients.forEach(function each(client) {
-//             if(client !== ws && client.readyState === WebSocket.OPEN){
-//                 client.send(`${message} `, JSON.stringify(message))
-//             }
-//         })
-
-//     })
-// })
-//PUSHER
-
-const pusher = new Pusher({
-  appId: process.env.APP_ID_PUSHER,
-  key: process.env.KEY_PUSHER,
-  secret: process.env.SERECT_PUSHER,
-  cluster: process.env.CLUSTER_PUSHER,
-
-  useTLS: true,
-});
-app.post("/send-event", (req, res) => {
-  pusher.trigger("orders", "admin-new-order", {
-    message: `Đơn Đặt Hàng Mới Từ ${req.body.name}!`,
-  });
-  res.sendStatus(200);
-});
 
 // API
 app.use("/api/import", ImportData);

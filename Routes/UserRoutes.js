@@ -694,8 +694,6 @@ userRouter.post(
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 1, // 1 days
         sameSite:'strict',
-        domain:"https://tickcafentea.com",
-        path:"/",
       })
     
       res.json({
