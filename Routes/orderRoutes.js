@@ -34,7 +34,7 @@ async function sendEmailOrderBillAdmin(
     }
     orderItemsHTML += `
     <div class="product-item">
-        <h4 style="color:"#000">${orderItems[i].name} x${orderItems[i].qty}</h4>
+        <h4>${orderItems[i].name} x${orderItems[i].qty}</h4>
         ${toppingHTML}
     </div>
     `;
@@ -59,6 +59,7 @@ async function sendEmailOrderBillAdmin(
         <style type="text/css">
         .product-item{
           border-bottom: 1px solid #000;
+          color:#000
           
         }
         
