@@ -63,9 +63,9 @@ async function sendEmailOrderBillAdmin(
           
         }
         .product-inner{
-          display:flex;
-          flex-direction: column;
-          justify-content: center;      
+          display:flex!important;
+          flex-direction: column!important;
+          justify-content: center!important;      
         }
         
         
