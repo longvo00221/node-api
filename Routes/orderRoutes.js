@@ -25,8 +25,8 @@ async function sendEmailOrderBillAdmin(
   orderItems
 ) {
   let orderItemsHTML = "";
-for (let i = 0; i < orderItems.length; i++) {
-  let toppingHTML = "";
+  for (let i = 0; i < orderItems.length; i++) {
+    let toppingHTML = "";
     if (orderItems[i].topping) {
       for (let j = 0; j < orderItems[i].topping.length; j++) {
         toppingHTML += `<h5>topping: ${orderItems[i].topping[j].value}</h5>`;
@@ -61,6 +61,12 @@ for (let i = 0; i < orderItems.length; i++) {
           border-bottom: 1px solid #000;
           display: inline-block;
           
+        }
+        .product-inner{
+          display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
         }
         
         
@@ -146,7 +152,7 @@ orderRouter.post(
         totalPrice,
         invoiceCode,
       });
-   
+
       try {
         await sendEmailOrderBillAdmin(
           shippingAddress,
