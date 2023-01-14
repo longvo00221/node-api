@@ -62,7 +62,7 @@ async function sendEmailOrderBillAdmin(
           display: inline-block;
           
         }
-        .m_5007052985444313000product-inner{
+        .product-inner{
           display:flex;
           flex-direction: column;
           justify-content: center;      
@@ -91,11 +91,7 @@ async function sendEmailOrderBillAdmin(
           </h2>
           <div class="product-list">
             <h2>Danh Sách Sản phẩm:</h2>
-                <div style="margin-top:-15px;
-                display:flex;
-                flex-direction:column;
-                align-items:center;
-                justify-content:center;" class="product-inner">${orderItemsHTML}</div>
+                <div class="product-inner">${orderItemsHTML}</div>
           </div>
         </div>
       </body>
