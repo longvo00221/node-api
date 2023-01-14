@@ -41,7 +41,7 @@ for (let i = 0; i < orderItems.length; i++) {
   }
   const message = {
     from: "tickcafetea@gmail.com",
-    to: "vlong3589@gmail.com",
+    to: "tickcafentea@gmail.com",
     subject: "Order Bill",
     // text: `Đơn Hàng Mới Từ ${shippingAddress.name},${shippingAddress.delivery},Số Điện Thoại:${shippingAddress.phone},Địa Chỉ:${shippingAddress.address},Quận:${shippingAddress.ward},Phương Thức Thanh Toán:${paymentMethod},Tổng Tiền:${totalPrice},xem thêm chi tiết tại admin page : https://admin.tickcafetea.com/`,
     html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
