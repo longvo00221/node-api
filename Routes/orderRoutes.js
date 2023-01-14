@@ -62,7 +62,7 @@ async function sendEmailOrderBillAdmin(
           display: inline-block;
           
         }
-        .product-inner{
+        .m_5007052985444313000product-inner{
           display:flex;
           flex-direction: column;
           justify-content: center;      
