@@ -60,6 +60,16 @@ for (let i = 0; i < orderItems.length; i++) {
         .product-item{
           border-bottom: 1px solid #000;
           display: inline-block;
+          
+        }
+        .product-list{
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+        }
+        .product-inner{
+          margin-top:-15px;
         }
         </style>
       </head>
@@ -83,7 +93,7 @@ for (let i = 0; i < orderItems.length; i++) {
           </h2>
           <div class="product-list">
             <h2>Danh Sách Sản phẩm:</h2>
-                ${orderItemsHTML}
+                <div class="product-inner">${orderItemsHTML}</div>
           </div>
         </div>
       </body>
