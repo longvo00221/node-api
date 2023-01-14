@@ -59,13 +59,7 @@ async function sendEmailOrderBillAdmin(
         <style type="text/css">
         .product-item{
           border-bottom: 1px solid #000;
-          display: inline-block;
           
-        }
-        .product-inner{
-          display:flex!important;
-          flex-direction: column!important;
-          justify-content: center!important;      
         }
         
         
