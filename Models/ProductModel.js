@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import Toppings from './ToppingModel.js'
+
 const reviewSchema = mongoose.Schema({
     name:{
         type:String,

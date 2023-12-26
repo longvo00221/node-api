@@ -624,39 +624,7 @@ origin: ['http://localhost:3000', 'https://www.tickcafentea.com']
     }
   })
 );
-// LOGIN
-// userRouter.post(
-//   "/login",
-//   cors({
-//     origin: "*",
-//   }),
-//   asyncHandler(async (req, res) => {
-//     const { email, password } = req.body;
-//     const user = await User.findOne({ email });
 
-//     if (
-//       user &&
-//       user.verificationToken != null &&
-//       (await user.matchPassword(password))
-//     ) {
-//       res.json({
-//         _id: user._id,
-//         name: user.name,
-//         email: user.email,
-//         phone: user.phone,
-//         birthday: user.birthday,
-//         avatar: user.avatar,
-//         isAdmin: user.isAdmin,
-//         token: generateToken(user._id),
-//         createdAt: user.createdAt,
-//       });
-//     } else if (user && user.verificationToken === null) {
-//       res.status(401).json({ message: "Please verify your email" });
-//     } else {
-//       res.status(401).json({ message: "Invalid Email or Password" });
-//     }
-//   })
-// );
 
 userRouter.post(
   '/login',
