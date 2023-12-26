@@ -838,7 +838,7 @@ userRouter.post(
 
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `https://client-ecommerce-beta.vercel.app/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     const message = `${resetPasswordUrl}`;
     try {
